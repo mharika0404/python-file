@@ -1,0 +1,14 @@
+arr=list(map(int,input().split()))
+n=len(arr)
+stack=[]
+ans=[]
+for ind in range(n-1,-1,-1):#1
+     curEle=arr[ind]
+     while(len(stack)!=0 and stack [-1]<=curEle):
+            stack.pop()
+     if(len(stack)==0):
+          ans.append(-1)
+     else:
+         ans.append(stack[-1])
+     stack.append(curEle)
+print(ans[::-1])
