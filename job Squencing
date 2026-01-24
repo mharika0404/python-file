@@ -1,0 +1,16 @@
+jobs=[[1,2,100],[2,1,19],[3,2,27],[4,1,25],[5,3,15]]
+n=len(jobs)
+jobs.sort(key = lambda x: - x[2])
+maxDeadline = 0
+for row in range(0,n):
+     maxDeadline = max(maxDeadline,jobs[row][1])
+slots = [-1]*(maxDeadline+1)
+count,maxprofit = 0,0
+for row in range(0,n):
+     for deadline in range(jobs[row][1],0,-1):
+          if(slots[deadline] == -1):
+               slots[deadline] = jobs[row][0]
+               count+=1
+               maxprofit+=jobs[row][2]
+               break
+print(count,maxprofit)
