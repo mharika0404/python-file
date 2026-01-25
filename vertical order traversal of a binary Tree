@@ -1,0 +1,28 @@
+from collections import defaultdict,deque
+class Node:
+      def __init__(self,val):
+           self.val = val
+           self.left = None
+           self.right = None
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.right = Node(6)
+d = defaultdict(lambda : defaultdict(list))
+q = deque([(0,0,root)])
+while(len(q)>0):
+      level,vertical,node = q.popleft()
+      if(node.left):
+           q.append((level+1,vertical-1,node.left))
+      if(node.right):
+           q.append((level+1,vertical+1,node.right))
+      d[vertical][level].append(node.val)
+ans = []
+for i in sorted(d):
+     temp = []
+     for j in sorted(d[i]):
+          temp.extend(sorted(d[i][j]))
+     ans.append(temp)
+print(ans)
