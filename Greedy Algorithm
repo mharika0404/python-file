@@ -1,0 +1,14 @@
+g=list(map(int,input().split()))
+s=list(map(int,input().split()))
+if not g:
+     print(0)
+     exit()
+g.sort()
+s.sort()
+i =0
+j=0
+while i<len(g) and j<len(s):
+      if (s[j]>=g[i]):
+            i+=1
+      j+=1
+print(i)
