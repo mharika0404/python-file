@@ -1,0 +1,19 @@
+class Solution:
+    def champagneTower(self, poured: int, query_row: int, query_glass: int) -> float:
+        currentRow = [float(poured)]
+        for r in range(query_row + 1):
+            nextRow = [0.0] * (r + 2)
+            anyOverflow = False
+            for c in range(r + 1): 
+                if currentRow[c] > 1.0:
+                    excess = currentRow[c] - 1.0
+                    splitFlow = excess / 2.0
+                    nextRow[c] += splitFlow
+                    nextRow[c + 1] += splitFlow
+                    currentRow[c] = 1.0  
+                    anyOverflow = True
+            if not anyOverflow and r < query_row:
+                return currentRow[query_glass] if r == query_row else 0.0
+            if r != query_row:
+                currentRow = nextRow     
+        return currentRow[query_glass]
